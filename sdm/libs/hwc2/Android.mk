@@ -14,6 +14,13 @@ LOCAL_HEADER_LIBRARIES        := display_headers
 LOCAL_CFLAGS                  := -Wno-missing-field-initializers -Wno-unused-parameter \
                                  -fcolor-diagnostics\
                                  -DLOG_TAG=\"SDM\" $(common_flags)
+
+ifneq ($(BOARD_PANEL_MAX_BRIGHTNESS),)
+    LOCAL_CFLAGS += -DMAX_BRIGHTNESS=$(BOARD_PANEL_MAX_BRIGHTNESS)
+else
+    LOCAL_CFLAGS += -DMAX_BRIGHTNESS=255
+endif
+
 LOCAL_CLANG                   := true
 
 LOCAL_SHARED_LIBRARIES        := libsdmcore libqservice libbinder libhardware libhardware_legacy \
